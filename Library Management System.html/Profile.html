@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Library Management System Profile</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Info-Board</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid black;
+        background-color: saddlebrown;
+        color: white;
+    }
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+    th {
+        background-color: navajowhite;
+    }
+    button {
+        padding: 8px 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-color: aliceblue;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-image: url("LMS.jpeg");
+    }
+
+    header {
+        color: white;
+        padding: 40px;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    button {
+        background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient effect */
+        border: none;
+        padding: 12px 25px; /* Slightly larger padding for better visuals */
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold; /* Adds emphasis */
+        border-radius: 25px; /* Fully rounded button */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        transition: all 0.3s ease; /* Smooth transition for hover effects */
+    }
+
+    button:hover {
+        background: linear-gradient(90deg, #feb47b, #ff7e5f); /* Reverse gradient */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow */
+        transform: translateY(-2px); /* Slight "pop-out" effect */
+    }
+
+    button:active {
+        background: #d35400; /* Darker solid color on click */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+        transform: translateY(1px); /* Pressed-in effect */
+   }
+
+    #profile {
+        margin: 40px auto;
+        max-width: 500px;
+        padding: 20px;
+        width: 90%;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        justify-content: center;
+        border: 2px solid #f1f1f1;
+    }
+
+    .profile-container img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-right: 20px;
+        object-fit: cover;
+        border: 2px solid black;
+    }
+
+    .profile-details p {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .profile-details strong {
+        color: #333;
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
+    }
+
+    h1 {
+        background-color: saddlebrown;
+        text-align: center;
+        color: navajowhite;
+    }
+
+    .heading-container {
+        text-align: center;
+        margin: 20px auto;
+        padding: 10px;
+        background: rgba(131, 123, 123, 0.6);
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(255, 251, 251, 0.952); /* Soft shadow */
+        max-width: 80%; /* Centers the container with limited width */
+        border: 2px solid #f1f1f1;
+}
+
+    .heading-container h2 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+        text-transform: uppercase; /* Makes the text uppercase */
+        letter-spacing: 1px; /* Adds slight spacing between letters */
+}
+
+
+</style>
+
+<body>
+    <header>
+        <h2>Welcome to The Development of Web-based Library Management System for SHS Student of Informatics College Northgate INC.</h2>
+        <button id="availableBooksBtn">Available Books</button>
+        <button id="borrowedBooksBtn">Current Borrowed Books</button>
+        <button id="notificationsBtn">Notifications and Alerts</button>
+        <button id="borrowingHistoryBtn">Borrowing History</button>
+        <button id="librarySupportBtn">Library Policies and Support</button>
+        <button id="settingBtn">Settings</button>
+        <button id="logoutBtn">Logout</button>
+    </header>
+
+    <section id="profile">
+
+        <div class="heading-container">
+            <h2>Your Profile</h2>
+
+        </div>
+        <div class="profile-container">
+            <img id="profilePic" src="gg.jpeg" alt="Profile Picture" class="profile-pic">
+            <div class="profile-details">
+                <div>
+                    <p><strong>Name:</strong> <span id="profileName">Loading...</span></p>
+                    <p><strong>Email:</strong> <span id="profileEmail">Loading...</span></p>
+                    <p><strong>Strand:</strong> <span id="profileStrand">Loading...</span></p>
+                    <p><strong>Section:</strong> <span id="profileSection">Loading...</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="heading-container">
+        <h2>Student Attendance</h2>
+    </div>
+
+    <div style="width: 90%; height: 400px; overflow-y: auto; margin: 20px auto; padding: 10px; background-color: rgba(255, 255, 255, 0.9); border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <table style="width: 100%; height: 100%; border-collapse: collapse;">
+            <thead style="background-color: white;">
+                <tr>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Date</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Subject</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Status</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">October 1, 2024</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Literature</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Present</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">On time</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">October 5, 2024</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Science</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Absent</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Sick leave</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">October 10, 2024</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Mathematics</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Present</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">On time</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">October 15, 2024</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">History</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Late</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Traffic delay</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">October 20, 2024</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Philosophy</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Present</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">On time</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    
+    <script>
+        // User data array
+        const users = [
+            {
+                name: 'Ichiro Toshiro',
+                strand: 'ICT Programming',
+                section: 'Section 1',
+                email: 'Ichiro2011@example.com',
+                profilePicture: "gg.jpeg", 
+            },
+            {
+                name: 'Nolan Gonzales',
+                strand: 'ICT Programming',
+                section: 'Section 1',
+                email: 'Nolan@example.com',
+                profilePicture: "nolan.jpeg", 
+            },
+            // Add other users here
+        ];
+
+        // Simulating login and profile retrieval
+        window.onload = () => {
+            const loggedInUserEmail = 'Ichiro2011@example.com'; // Change to simulate different users
+
+            const loggedInUser = users.find(user => user.email === loggedInUserEmail);
+            if (loggedInUser) {
+                populateProfile(loggedInUser);
+            }
+        };
+
+        function populateProfile(user) {
+            document.getElementById('profileName').innerText = user.name;
+            document.getElementById('profileEmail').innerText = user.email;
+            document.getElementById('profileStrand').innerText = user.strand;
+            document.getElementById('profileSection').innerText = user.section;
+
+            const profilePic = document.getElementById('profilePic');
+            profilePic.src = user.profilePicture || 'gg.jpeg'; // Use default if no picture
+        }
+
+        // Navigation buttons
+        document.getElementById('availableBooksBtn').addEventListener('click', () => {
+            window.location.href = 'Availablebooks.html';
+        });
+        document.getElementById('borrowedBooksBtn').addEventListener('click', () => {
+            window.location.href = 'CurrentBooks.html';
+        });
+        document.getElementById('notificationsBtn').addEventListener('click', () => {
+            window.location.href = 'NotifAlert.html';
+        });
+        document.getElementById('borrowingHistoryBtn').addEventListener('click', () => {
+            window.location.href = 'BorrowHistory.html';
+        });
+        document.getElementById('librarySupportBtn').addEventListener('click', () => {
+            window.location.href = 'PoliciesSupport.html';
+        });
+        document.getElementById('settingBtn').addEventListener('click', () => {
+            window.location.href = 'setting.html';
+        });
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

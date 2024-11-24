@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Management System - Sign Up</title>
+    <style>
+        /* Your existing CSS styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-image: url("LMS.jpeg");
+            background-size: cover;
+            background-position: center;
+            background-size: auto;
+        }
+
+        header {
+            padding: 40px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        h2{
+            color: white;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            margin: 10px 0 0;
+            color: white;
+        }
+
+        #register-container {
+            margin: auto;
+            margin-top: 100px;
+            max-width: 350px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(255, 255, 255, 0.993);
+            text-align: left;
+            background: rgba(221, 215, 215, 0.6);
+            border: 2px solid #f1f1f1;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: block;
+            color:  white;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 14px;
+            border: 2px solid white;
+            border-radius: 4px;
+            width: 90%;
+            background: rgba(230, 223, 223, 0.6);
+            color: white;
+        }
+
+        button {
+            background-color: blue;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            color: white;
+        }
+
+        button:hover {
+            background-color: blue;
+        }
+
+        .form-group-button {
+            margin-top: 20px;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .toggle-buttons button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            background-color:  blue;
+        }
+
+        .toggle-buttons button.active {
+            background-color:  blue;
+        }
+
+        .a {
+            color: black;
+        }
+</style>
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Library Management System Sign Up</h1>
+        <p>Choose a role to register</p>
+    </header>
+    <div id="register-container">
+        <div class="toggle-buttons">
+            <button id="studentBtn" class="active" onclick="toggleForm('student')">Student Sign Up</button>
+            <button id="adminBtn" onclick="toggleForm('admin')">Admin Sign Up</button>
+        </div>
+
+        <!-- Student Sign Up Form -->
+        <form id="studentForm">
+            <h2>Student Sign Up</h2>
+            <div class="form-group">
+                <label for="studentName">Full Name</label>
+                <input type="text" id="studentName" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="studentEmail">Email</label>
+                <input type="email" id="studentEmail" name="email" required placeholder="Enter your email address">
+            </div>
+            <div class="form-group">
+                <label for="studentPassword">Password</label>
+                <input type="password" id="studentPassword" name="password" required placeholder="Create a password">
+            </div>
+            <div class="form-group">
+                <label for="grade">Grade Level & Strand</label>
+                <input type="text" id="grade" name="grade" required placeholder="Grade Level">
+            </div> 
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <input type="text" id="gender" name="gender" required placeholder="Gender">
+            </div>
+            <div class="form-group-button">
+                <button type="submit">Register as Student</button>
+            </div>
+            <p style="color: blue;">Already have an account? <a href="login.html" class="a">Login here</a></p>
+        </form>
+
+        <!-- Admin Sign Up Form -->
+        <form id="adminForm" style="display: none;">
+            <h2>Admin Sign Up</h2>
+            <div class="form-group">
+                <label for="adminName">Full Name</label>
+                <input type="text" id="adminName" name="name" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="adminEmail">Email</label>
+                <input type="email" id="adminEmail" name="email" required placeholder="Enter your email address">
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <input type="password" id="adminPassword" name="password" required placeholder="Create a password">
+            </div>
+            <div class="form-group-button">
+                <button type="submit">Register as Admin</button>
+            </div>
+            <p style="color: blue;">Already have an account? <a href="login.html" class="a">Login here</a></p>
+        </form>
+    </div>
+
+    <script>
+
+        // This code would be used in the login or sign-up script
+        const userInfo = {
+            role: 'student', // or 'admin'
+            studentID: '12345',
+            name: 'John Doe',
+            email: 'ichiro2011@example.com',
+            gradeLevel: 'Grade 12',
+            gender: 'Male'
+        };
+        
+        // Save user information in localStorage
+        localStorage.setItem('user', JSON.stringify(userInfo));
+        
+        
+                function toggleForm(role) {
+                    const studentForm = document.getElementById('studentForm');
+                    const adminForm = document.getElementById('adminForm');
+                    const studentBtn = document.getElementById('studentBtn');
+                    const adminBtn = document.getElementById('adminBtn');
+        
+                    if (role === 'student') {
+                        studentForm.style.display = 'block';
+                        adminForm.style.display = 'none';
+                        studentBtn.classList.add('active');
+                        adminBtn.classList.remove('active');
+                    } else {
+                        studentForm.style.display = 'none';
+                        adminForm.style.display = 'block';
+                        adminBtn.classList.add('active');
+                        studentBtn.classList.remove('active');
+                    }
+                }
+        
+                document.getElementById('studentForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    alert("Student registration successful!");
+                    window.location.href = 'login.html';
+                });
+        
+                document.getElementById('adminForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    alert("Admin registration successful!");
+                    window.location.href = 'login.html';
+                });
+
+            </script>
+</body>
+</html>

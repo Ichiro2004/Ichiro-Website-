@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System Settings</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("LMS.jpeg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: saddlebrown;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        header button:hover {
+            background-color: #8b4513;
+        }
+
+        .settings-section {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background: rgba(131, 123, 123, 0.6);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .settings-section h2 {
+            margin-top: 0;
+        }
+
+        .settings-section label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+
+        .settings-section input[type="text"],
+        .settings-section input[type="email"],
+        .settings-section input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        .settings-section input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .settings-section button {
+            padding: 10px 15px;
+            background-color: saddlebrown;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .settings-section button:hover {
+            background-color: #8b4513;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Settings</h1>
+        <button onclick="window.location.href='Profile.html'"">Back to Dashboard</button>
+    </header>
+
+    <section class="settings-section">
+        <h2>Profile Settings</h2>
+        <form id="profileForm">
+            <label for="profileName">Name:</label>
+            <input type="text" id="profileName" placeholder="Enter your name">
+            
+            <label for="profileEmail">Email:</label>
+            <input type="email" id="profileEmail" placeholder="Enter your email">
+
+            <button type="button" onclick="updateProfile()">Save Profile</button>
+        </form>
+    </section>
+
+    <section class="settings-section">
+        <h2>Notification Settings</h2>
+        <form id="notificationForm">
+            <label>
+                <input type="checkbox" id="emailNotifications"> Email Notifications
+            </label>
+            <label>
+                <input type="checkbox" id="smsNotifications"> SMS Notifications
+            </label>
+
+            <button type="button" onclick="updateNotifications()">Save Notifications</button>
+        </form>
+    </section>
+
+    <section class="settings-section">
+        <h2>Password Change</h2>
+        <form id="passwordForm">
+            <label for="currentPassword">Current Password:</label>
+            <input type="password" id="currentPassword" placeholder="Enter current password">
+
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" placeholder="Enter new password">
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm new password">
+
+            <button type="button" onclick="changePassword()">Change Password</button>
+        </form>
+    </section>
+
+    <script>
+        // Simulated user data
+        window.onload = () => {
+            // Simulate user data - set initial profile details
+            document.getElementById('profileName').value = "Ichiro Toshiro"; 
+            document.getElementById('profileEmail').value = "Ichiro2011@example.com";
+            document.getElementById('emailNotifications').checked = true;
+            document.getElementById('smsNotifications').checked = false;
+        };
+    
+        function updateProfile() {
+            const name = document.getElementById('profileName').value.trim();
+            const email = document.getElementById('profileEmail').value.trim();
+    
+            // You can log updated profile information here if needed
+            console.log(`Profile Updated: Name: ${name}, Email: ${email}`);
+    
+            // After updating profile, redirect to the appropriate dashboard
+            redirectToDashboard(email);
+        }
+    
+        function redirectToDashboard(userEmail) {
+            // Determine the redirection based on the user's email
+            if (userEmail === 'Ichiro2011@example.com') {
+                window.location.href = 'Profile.html';
+            } else if (userEmail === 'Nolan@example.com') {
+                window.location.href = 'Profile2.html';
+            } else {
+                window.location.href = 'defaultProfile.html';  // Fallback page
+            }
+        }
+    
+        function updateNotifications() {
+            const emailNotifications = document.getElementById('emailNotifications').checked;
+            const smsNotifications = document.getElementById('smsNotifications').checked;
+    
+            // Display the notification preferences
+            alert(`Notification settings saved:\nEmail Notifications: ${emailNotifications}\nSMS Notifications: ${smsNotifications}`);
+        }
+    
+        function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+    
+            // Validate password fields
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                alert("All password fields must be filled.");
+                return;
+            }
+    
+            if (newPassword !== confirmPassword) {
+                alert("New passwords do not match.");
+                return;
+            }
+    
+            // Notify success
+            alert("Password changed successfully.");
+        }
+    </script>
+    
+</body>
+</html>

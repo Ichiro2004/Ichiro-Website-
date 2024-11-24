@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("BG.jpeg");
+    background-size: cover;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: blue;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-input {
+    padding: 8px;
+    margin: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 250px;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 10px 0 5px;
+}
+
+form input, form textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    background-color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+button {
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #4a65ad;
+}
+
+button.delete {
+    background-color: #e74c3c;
+}
+
+button.delete:hover {
+    background-color: #c0392b;
+}
+
+button.edit {
+    background-color: #3498db;
+}
+
+button.edit:hover {
+    background-color: lightblue;
+}
+
+.back-btn {
+            text-align: center;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color:  blue;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background-color: blue;
+        }
+
+  </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Books - Admin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Manage Books</h1>
+            <button onclick="showAddBookForm()">Add New Book</button>
+            <div class="form-group-button" style="margin-top: 20px;">
+                <a href="AdminDash.html" class="back-btn">Back to Dashboard</a>
+            </div>
+        </header>
+
+        <!-- Search and Filter Section -->
+        <div class="search-container">
+            <input type="text" id="searchInput" oninput="searchBooks()" placeholder="Search books..." class="search-input">
+            <select id="filterCategory" onchange="filterCategory()" class="search-input">
+                <option value="">Filter by Category</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Non-fiction">Non-fiction</option>
+                <option value="Science">Science</option>
+                <option value="Technology">Technology</option>
+                <!-- Add more categories as needed -->
+            </select>
+        </div>
+
+        <!-- Add Book Form -->
+        <div id="addBookForm" class="form-container">
+            <h2>Add Book</h2>
+            <form id="bookForm" onsubmit="addBook(event)">
+                <label for="title">Book Title:</label>
+                <input type="text" id="title" required><br>
+
+                <label for="author">Author:</label>
+                <input type="text" id="author" required><br>
+
+                <label for="category">Category:</label>
+                <input type="text" id="category" required><br>
+
+                <label for="description">Description:</label>
+                <textarea id="description" required></textarea><br>
+
+                <label for="availability">Availability:</label>
+                <input type="number" id="availability" required><br>
+
+                <button type="submit">Add Book</button>
+                <button type="button" onclick="closeAddBookForm()">Cancel</button>
+            </form>
+        </div>
+
+        <!-- Books List -->
+        <h2>Books in Library</h2>
+        <table id="booksTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Availability</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="bookList">
+                <!-- Book entries will be dynamically added here -->
+            </tbody>
+        </table>
+        
+        <script>
+            let books = [
+                {title: "To Kill a Mockingbird", author: "Harper Lee", category: "Fiction", description: "A novel about the serious issues of rape and racial inequality.", availability: 5},
+                {title: "1984", author: "George Orwell", category: "Dystopian", description: "A chilling portrayal of a totalitarian regime.", availability: 3},
+                {title: "The Great Gatsby", author: "F. Scott Fitzgerald", category: "Classic", description: "A story of the Jazz Age in the United States in the 1920s.", availability: 4},
+                {title: "The Catcher in the Rye", author: "J.D. Salinger", category: "Fiction", description: "A story about teenage angst and alienation.", availability: 6},
+                {title: "Brave New World", author: "Aldous Huxley", category: "Dystopian", description: "A futuristic society where technology has eradicated individuality.", availability: 7},
+                {title: "The Hobbit", author: "J.R.R. Tolkien", category: "Fantasy", description: "A young hobbit embarks on an epic adventure in Middle Earth.", availability: 8},
+                {title: "Pride and Prejudice", author: "Jane Austen", category: "Romance", description: "A romantic story about Elizabeth Bennet and Mr. Darcy.", availability: 2},
+                {title: "Harry Potter and the Sorcerer's Stone", author: "J.K. Rowling", category: "Fantasy", description: "A young wizard begins his journey in the magical world of Hogwarts.", availability: 10},
+                {title: "The Lord of the Rings", author: "J.R.R. Tolkien", category: "Fantasy", description: "An epic journey to destroy the One Ring and save Middle Earth.", availability: 5},
+                {title: "Moby-Dick", author: "Herman Melville", category: "Adventure", description: "The journey of Captain Ahab and his obsession with hunting the white whale.", availability: 3}
+            ];
+        
+            // Display books on page load
+            function displayBooks() {
+                const tableBody = document.querySelector("#bookList");
+                tableBody.innerHTML = ""; // Clear current list
+        
+                books.forEach((book, index) => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${book.title}</td>
+                        <td>${book.author}</td>
+                        <td>${book.category}</td>
+                        <td>${book.description}</td>
+                        <td>${book.availability}</td>
+                        <td>
+                            <button onclick="editBook(${index})">Edit</button>
+                            <button onclick="deleteBook(${index})">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        
+            // Add new book
+            function addBook(event) {
+                event.preventDefault();
+        
+                const title = document.getElementById("title").value;
+                const author = document.getElementById("author").value;
+                const category = document.getElementById("category").value;
+                const description = document.getElementById("description").value;
+                const availability = parseInt(document.getElementById("availability").value);
+        
+                const newBook = { title, author, category, description, availability };
+                books.push(newBook);
+                displayBooks();
+                closeAddBookForm();
+                document.getElementById("bookForm").reset();
+                showMessage("Book added successfully!", "success");
+            }
+        
+            // Show add book form
+            function showAddBookForm() {
+                document.getElementById("addBookForm").style.display = "block";
+            }
+        
+            // Close add book form
+            function closeAddBookForm() {
+                document.getElementById("addBookForm").style.display = "none";
+            }
+        
+            // Edit book
+            function editBook(index) {
+                const book = books[index];
+        
+                document.getElementById("title").value = book.title;
+                document.getElementById("author").value = book.author;
+                document.getElementById("category").value = book.category;
+                document.getElementById("description").value = book.description;
+                document.getElementById("availability").value = book.availability;
+        
+                showAddBookForm();
+        
+                deleteBook(index); // Remove the old entry
+            }
+        
+            // Delete book
+            function deleteBook(index) {
+                books.splice(index, 1);
+                displayBooks();
+                showMessage("Book deleted successfully!", "success");
+            }
+        
+            // Search books
+            function searchBooks() {
+                const searchInput = document.getElementById("searchInput").value.toLowerCase();
+                const filteredBooks = books.filter(book => 
+                    book.title.toLowerCase().includes(searchInput) || 
+                    book.author.toLowerCase().includes(searchInput)
+                );
+                displayFilteredBooks(filteredBooks);
+            }
+        
+            // Filter books by category
+            function filterCategory() {
+                const category = document.getElementById("filterCategory").value;
+                const filteredBooks = category ? 
+                    books.filter(book => book.category === category) : 
+                    books;
+                displayFilteredBooks(filteredBooks);
+            }
+        
+            // Display filtered books
+            function displayFilteredBooks(filteredBooks) {
+                const tableBody = document.querySelector("#bookList");
+                tableBody.innerHTML = "";
+        
+                filteredBooks.forEach((book, index) => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${book.title}</td>
+                        <td>${book.author}</td>
+                        <td>${book.category}</td>
+                        <td>${book.description}</td>
+                        <td>${book.availability}</td>
+                        <td>
+                            <button onclick="editBook(${index})">Edit</button>
+                            <button onclick="deleteBook(${index})">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        
+            // Show success or error messages
+            function showMessage(message, type) {
+                const messageElement = document.getElementById("message");
+                messageElement.textContent = message;
+                messageElement.className = `message ${type}`;
+                messageElement.style.display = "block";
+        
+                setTimeout(() => {
+                    messageElement.style.display = "none";
+                }, 3000);
+            }
+        
+            // Initial display of books
+            displayBooks();
+        </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Library Management System Policies and Support</title>
+  
+  <style>
+    /* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: white;
+    color: black;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+}
+
+section {
+    padding: 20px;
+    margin: 20px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.policies ul,
+.support ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.policies li,
+.support li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.faq-section {
+    display: none;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+a:hover {
+    background-color: #2980b9;
+}
+  </style>
+  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Policy & Support</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Library Policies and Support</h1>
+    </header>
+
+    <section class="policies">
+        <h2>Library Policies</h2>
+        <ul>
+            <li><strong>Policy 1:</strong> All books must be returned within the specified time frame.</li>
+            <li><strong>Policy 2:</strong> Late fees will be charged for overdue books.</li>
+            <li><strong>Policy 3:</strong> Books should be handled carefully to avoid damage.</li>
+            <li><strong>Policy 4:</strong> Only registered users are allowed to borrow books.</li>
+            <li><strong>Policy 5:</strong> Any lost or damaged books must be reported immediately.</li>
+        </ul>
+    </section>
+
+    <section class="support">
+        <h2>Support</h2>
+        <p>If you have any questions, please contact our library staff:</p>
+        <button id="faq-toggle">Toggle FAQ</button>
+
+        <div id="faq-section" class="faq-section">
+            <h3>Frequently Asked Questions</h3>
+            <ul>
+                <li><strong>Q: How do I borrow a book?</strong> <br> A: You can borrow books by registering as a student and issuing a book through the library system.</li>
+                <li><strong>Q: What happens if a book is overdue?</strong> <br> A: Late fees will be charged for every day the book is overdue. Please return it on time to avoid fines.</li>
+                <li><strong>Q: Can I reserve a book that's checked out?</strong> <br> A: Yes, you can reserve a book, and you'll be notified when it becomes available.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Link to back to dashboard -->
+    <button onclick="window.location.href='Profile.html'">Back to Dashboard</button>
+
+    <footer>
+        <p>&copy; 2024 Library Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      // Toggle the FAQ section visibility
+document.getElementById('faq-toggle').addEventListener('click', function() {
+    const faqSection = document.getElementById('faq-section');
+    faqSection.style.display = faqSection.style.display === 'none' || faqSection.style.display === '' ? 'block' : 'none';
+});
+
+    </script>
+</body>
+</html>

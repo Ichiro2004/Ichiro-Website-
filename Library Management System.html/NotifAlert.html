@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Library Management System Notification Alert</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications and Alerts</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Notification Container Style */
+        .notification-container {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Individual Notification Style */
+        .notification {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification p {
+            margin: 0;
+        }
+
+        .notification button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .notification button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Back to Dashboard Button Style */
+        .back-to-dashboard {
+            padding: 10px 20px;
+            background-color: #3498db; /* Blue color */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin: 10px;
+            display: block;
+            text-align: center;
+        }
+
+        .back-to-dashboard:hover {
+            background-color: #2980b9; /* Darker blue */
+        }
+
+        /* Header Style */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        body {
+            background-image: url("LMS.jpeg");
+        }
+    </style>
+</head>
+<body>
+    <!-- Back to Dashboard Button -->
+    <button id="backToDashboardBtn" class="back-to-dashboard">Back to Dashboard</button>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Notifications and Alerts</h1>
+    </header>
+
+    <!-- Notification Section -->
+    <section class="notification-container">
+        <h2>Recent Notifications</h2>
+
+        <!-- Notification 1 -->
+        <div class="notification">
+            <p><strong>Due Date Alert:</strong> "The Great Gatsby" is due in 3 days.</p>
+            <button onclick="dismissNotification(1)">Dismiss</button>
+        </div>
+
+        <!-- Notification 2 -->
+        <div class="notification">
+            <p><strong>Library Event:</strong> Don't miss our book fair next week!</p>
+            <button onclick="dismissNotification(2)">Dismiss</button>
+        </div>
+
+        <!-- Notification 3 -->
+        <div class="notification">
+            <p><strong>New Book Available:</strong> "Sapiens: A Brief History of Humankind" is now available for borrowing.</p>
+            <button onclick="dismissNotification(3)">Dismiss</button>
+        </div>
+    </section>
+
+    <!-- JavaScript to handle dismiss and back button functionality -->
+    <script>
+        // Function to dismiss a notification
+        function dismissNotification(id) {
+            const notification = document.querySelectorAll('.notification')[id - 1];
+            notification.style.display = 'none';
+        }
+
+        // Back to Dashboard functionality
+        document.getElementById('backToDashboardBtn').addEventListener('click', () => {
+            window.location.href = 'Profile.html';  // Redirect to your dashboard page
+        });
+    </script>
+
+</body>
+</html>

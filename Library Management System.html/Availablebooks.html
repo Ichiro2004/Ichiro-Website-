@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+    <title>Library Management System availableBooks</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Info-Board</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<style>
+ table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+            background-color: saddlebrown;
+            color: white;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: navajowhite;
+            
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+    html, body {
+        height: 100%;
+        margin: 0;   
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-color: aliceblue;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-image: url("LMS.jpeg");
+    }
+
+    header {
+        color: white;
+        padding: 40px;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.7);
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    button {
+        background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient effect */
+        border: none;
+        padding: 12px 25px; /* Slightly larger padding for better visuals */
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold; /* Adds emphasis */
+        border-radius: 25px; /* Fully rounded button */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        transition: all 0.3s ease; /* Smooth transition for hover effects */
+    }
+
+    button:hover {
+        background: linear-gradient(90deg, #feb47b, #ff7e5f); /* Reverse gradient */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow */
+        transform: translateY(-2px); /* Slight "pop-out" effect */
+    }
+
+    button:active {
+        background: #d35400; /* Darker solid color on click */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+        transform: translateY(1px); /* Pressed-in effect */
+   }
+
+    #profile {
+        margin: 40px auto;
+        max-width: 550px;
+        padding: 20px;
+        width: 90%;
+    }
+
+    .profile-container {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        justify-content: center;
+    }
+
+    .profile-container img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-right: 20px;
+        object-fit: cover;
+    }
+
+    .profile-details p {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .profile-details strong {
+        color: #333;
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
+    }
+
+    h1 {
+        background-color: saddlebrown;
+        text-align: center;
+        color: navajowhite;
+    }
+
+    .back-btn {
+            text-align: center;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background-color: #2980b9;
+        }
+        </style>
+
+<body>
+    <header>
+        <h2>Welcome to The Development of Web-based Library Management System for SHS Student of Informatics College Northgate INC.</h2>
+        <button id="availableBooksBtn">Available Books</button>
+        <button id="borrowedBooksBtn">Current Borrowed Books</button>
+        <button id="notificationsBtn">Notifications and Alerts</button>
+        <button id="borrowingHistoryBtn">Borrowing History</button>
+        <button id="librarySupportBtn">Library Policies and Support</button>
+        <button id="settingBtn">Settings</button>
+        <button id="logoutBtn">Logout</button>
+
+    </header>
+
+    <div class="form-group-button" style="margin-top: 20px;">
+        <a href="Profile.html" class="back-btn">Back to Dashboard</a>
+    </div>
+    <h2>Available Books</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Books Image</th>
+                <th>Subject</th>
+                <th>Book Title</th>
+                <th>Author</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><img src="img1.jpeg" alt="img" width="50" height="50"></td>
+                <td>Literature</td>
+                <td>The Great Gatsby</td>
+                <td>F. Scott Fitzgerald</td>
+                <td><button onclick="borrowBook('The Great Gatsby')">Borrow</button></td>
+            </tr>
+            <tr>
+                <td><img src="img2.jpeg" alt="img" width="50" height="50"></td>
+                <td>Science</td>
+                <td>A Brief History of Time</td>
+                <td>Stephen Hawking</td>
+                <td><button onclick="borrowBook('A Brief History of Time')">Borrow</button></td>
+            </tr>
+            <tr>
+                <td><img src="img3.jpeg" alt="img" width="50" height="50"></td>
+                <td>History</td>
+                <td>Sapiens: A Brief History of Humankind</td>
+                <td>Yuval Noah Harari</td>
+                <td><button onclick="borrowBook('Sapiens: A Brief History of Humankind')">Borrow</button></td>
+            </tr>
+            <tr>
+                <td><img src="img4.jpeg" alt="img" width="50" height="50"></td>
+                <td>Mathematics</td>
+                <td>The Joy of x: A Guided Tour of Math, from One to Infinity</td>
+                <td>Steven Strogatz</td>
+                <td><button onclick="borrowBook('The Joy of x')">Borrow</button></td>
+            </tr>
+            <tr>
+                <td><img src="img5.jpegg.jpg" alt="img" width="50" height="50"></td>
+                <td>English Language</td>
+                <td>Elements of Style</td>
+                <td>William Strunk Jr. and E.B. White</td>
+                <td><button onclick="borrowBook('Elements of Style')">Borrow</button></td>
+            </tr>
+            <tr>
+                <td><img src="img6.jpeg" alt="img" width="50" height="50"></td>
+                <td>Philosophy</td>
+                <td>Meditations</td>
+                <td>Marcus Aurelius</td>
+                <td><button onclick="borrowBook('Meditations')">Borrow</button></td>
+            </tr>
+            <tr>
+                <td><img src="img7.jpeg" alt="img" width="50" height="50"></td>
+                <td>Business</td>
+                <td>The Lean Startup</td>
+                <td>Eric Ries</td>
+                <td><button onclick="borrowBook('The Lean Startup')">Borrow</button></td>
+            </tr>
+            <tr>
+                <td><img src="img8.jpegg.jpg" alt="img" width="50" height="50"></td>
+                <td>Psychology</td>
+                <td>Thinking, Fast and Slow</td>
+                <td>Daniel Kahneman</td>
+                <td><button onclick="borrowBook('The Prince')">Borrow</button></td>
+    
+            </tr>
+            <tr>
+                <td><img src="img9.jpeg" alt="img" width="50" height="50"></td>
+                <td>Political Science</td>
+                <td>The Prince</td>
+                <td>Niccolò Machiavelli</td>
+                <td><button onclick="borrowBook('The Prince')">Borrow</button></td>
+            </tr>
+            <tr>
+                <td><img src="img10.jpeg" alt="img" width="50" height="50"></td>
+                <td>Sociology</td>
+                <td>The Sociological Imagination</td>
+                <td>C. Wright Mills</td>
+                <td><button onclick="borrowBook('The Sociological Imagination')">Borrow</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function borrowBook(bookTitle) {
+            alert("You have borrowed: " + bookTitle);
+        }
+    
+        // User data array
+        const users = [
+            {
+                name: 'Ichiro Toshiro',
+                strand: 'ICT Programming',
+                section: 'Section 1',
+                email: 'Ichiro2011@example.com',
+                profilePicture: "gg.jpeg", 
+            },
+            {
+                name: 'Nolan Gonzales',
+                strand: 'ICT Programming',
+                section: 'Section 1',
+                email: 'Nolan@example.com',
+                profilePicture: "nolan.jpeg", 
+            },
+            // Add other users here
+        ];
+    
+        // Simulating login and profile retrieval
+        window.onload = () => {
+            const loggedInUserEmail = 'Ichiro2011@example.com'; // Change to simulate different users
+    
+            const loggedInUser = users.find(user => user.email === loggedInUserEmail);
+            if (loggedInUser) {
+                populateProfile(loggedInUser);
+            }
+        };
+    
+        function populateProfile(user) {
+            document.getElementById('profileName').innerText = user.name;
+            document.getElementById('profileEmail').innerText = user.email;
+            document.getElementById('profileStrand').innerText = user.strand;
+            document.getElementById('profileSection').innerText = user.section;
+    
+            const profilePic = document.getElementById('profilePic');
+            profilePic.src = user.profilePicture || 'gg.jpeg'; // Use default if no picture
+        }
+    
+        // Navigation buttons
+        document.getElementById('availableBooksBtn').addEventListener('click', () => {
+                window.location.href = 'Availablebooks.html';
+            });
+            document.getElementById('borrowedBooksBtn').addEventListener('click', () => {
+                window.location.href = 'CurrentBooks.html';
+            });
+            document.getElementById('notificationsBtn').addEventListener('click', () => {
+                window.location.href = 'NotifAlert.html';
+            });
+            document.getElementById('borrowingHistoryBtn').addEventListener('click', () => {
+                window.location.href = 'BorrowHistory.html';
+            });
+            document.getElementById('librarySupportBtn').addEventListener('click', () => {
+                window.location.href = 'PoliciesSupport.html';
+            });
+            document.getElementById('settingBtn').addEventListener('click', () => {
+                window.location.href = 'setting.html';
+            });
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                window.location.href = 'login.html';
+            });
+    </script>
+</body>
+</html>

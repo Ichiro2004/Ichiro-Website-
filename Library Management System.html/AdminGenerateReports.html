@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Reports - Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .report-output {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .download-link {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+
+        .download-link:hover {
+            background-color: #218838;
+        }
+
+        .back-btn {
+            text-align: center;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Generate Reports</h1>
+            <div class="form-group-button" style="margin-top: 20px;">
+                <a href="AdminDash.html" class="back-btn">Back to Dashboard</a>
+            </div>
+        </header>
+
+        <div class="form-group">
+            <label for="reportType">Select Report Type:</label>
+            <select id="reportType">
+                <option value="users">User Report</option>
+                <option value="books">Book Report</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button id="generateReportBtn">Generate Report</button>
+        </div>
+
+        <div class="report-output" id="reportOutput" style="display: none;">
+            <h2>Report Preview</h2>
+            <pre id="reportContent"></pre>
+            <a href="#" id="downloadReport" class="download-link" download>Download Report</a>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for reports
+        const sampleUsers = [
+            { userID: "1", name: "John Doe", email: "johndoe@example.com", role: "Admin" },
+            { userID: "2", name: "Jane Smith", email: "janesmith@example.com", role: "Student" },
+            { userID: "3", name: "Tom Brown", email: "tombrown@example.com", role: "Student" },
+        ];
+
+        const sampleBooks = [
+            { bookID: "101", title: "JavaScript Basics", author: "John Developer", available: true },
+            { bookID: "102", title: "CSS Design", author: "Jane Designer", available: false },
+            { bookID: "103", title: "HTML Mastery", author: "Tom Coder", available: true },
+        ];
+
+        const reportOutput = document.getElementById("reportOutput");
+        const reportContent = document.getElementById("reportContent");
+        const downloadReport = document.getElementById("downloadReport");
+
+        // Generate report function
+        document.getElementById("generateReportBtn").addEventListener("click", () => {
+            const reportType = document.getElementById("reportType").value;
+            let reportData = "";
+
+            if (reportType === "users") {
+                reportData = generateUserReport();
+            } else if (reportType === "books") {
+                reportData = generateBookReport();
+            }
+
+            // Display report
+            reportContent.textContent = reportData;
+            reportOutput.style.display = "block";
+
+            // Create downloadable file
+            const blob = new Blob([reportData], { type: "text/plain" });
+            const url = URL.createObjectURL(blob);
+            downloadReport.href = url;
+            downloadReport.download = `${reportType}-report.txt`;
+        });
+
+        // Generate user report
+        function generateUserReport() {
+            let report = "User Report\n\n";
+            report += "UserID\tName\tEmail\tRole\n";
+            report += "----------------------------------------\n";
+            sampleUsers.forEach(user => {
+                report += `${user.userID}\t${user.name}\t${user.email}\t${user.role}\n`;
+            });
+            return report;
+        }
+
+        // Generate book report
+        function generateBookReport() {
+            let report = "Book Report\n\n";
+            report += "BookID\tTitle\tAuthor\tAvailable\n";
+            report += "----------------------------------------\n";
+            sampleBooks.forEach(book => {
+                report += `${book.bookID}\t${book.title}\t${book.author}\t${book.available ? "Yes" : "No"}\n`;
+            });
+            return report;
+        }
+    </script>
+</body>
+</html>
